@@ -17,7 +17,7 @@ resource "aws_instance" "instance" {
   subnet_id = var.subnet
   vpc_security_group_ids = var.security_list
   key_name = var.key_pair
-  associate_public_ip_address = true
+  associate_public_ip_address = var.ip_address
   tags = {
     "Name" ="${var.name_ec2}"
   }

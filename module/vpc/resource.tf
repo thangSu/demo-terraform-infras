@@ -41,6 +41,8 @@ resource "aws_route_table_association" "rta1" {
   route_table_id = aws_route_table.rt1.id
   subnet_id = aws_subnet.subnet[1].id
 }
+
+# create nat gateway
 resource "aws_eip" "ip" {
     vpc = true
     tags ={
@@ -49,13 +51,17 @@ resource "aws_eip" "ip" {
 }
 resource "aws_nat_gateway" "nat" {
     allocation_id = aws_eip.ip.id
-    subnet_id = aws_subnet.subnet[2].id
+    subnet_id = aws_subnet.subnet[0].id
     tags = {
       "Name" = "Nat-subnet 2"
     }
 }
 resource "aws_route_table" "rt2" {
     vpc_id = aws_vpc.vpc1.id
+    route {
+    cidr_block = "0.0.0.0/0"
+    nat_nat_gateway_id = aws_nat_gateway.nat.id
+    }
     tags = {
       "Name" = "infra rt-private"
     }
