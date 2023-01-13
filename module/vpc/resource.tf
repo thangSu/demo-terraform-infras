@@ -60,7 +60,7 @@ resource "aws_route_table" "rt2" {
     vpc_id = aws_vpc.vpc1.id
     route {
     cidr_block = "0.0.0.0/0"
-    nat_nat_gateway_id = aws_nat_gateway.nat.id
+    nat_gateway_id = aws_nat_gateway.nat.id
     }
     tags = {
       "Name" = "infra rt-private"
