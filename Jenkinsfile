@@ -27,9 +27,6 @@ pipeline {
       }
     }
     stage('Apply Resources') {
-      input {
-        message "Do you want to proceed for production deployment?"
-      }
       steps {
         sh 'terraform {params.Actions} -auto-approve'
       }
