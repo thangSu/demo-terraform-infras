@@ -21,11 +21,6 @@ pipeline {
         sh 'terraform init'
       }
     }
-    stage('Plan Resources') {
-      steps {
-        sh 'terraform plan'
-      }
-    }
     stage('Apply Resources') {
       steps {
         sh 'terraform {params.Actions} -auto-approve'
